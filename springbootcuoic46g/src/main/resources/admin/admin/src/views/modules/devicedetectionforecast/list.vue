@@ -303,13 +303,14 @@
 						fullscreen: false,
 						text: '数据预测中...'
 					})
-					let arr = 'title,operationtemperature,workingpressure'.split(',')
+					let arr = 'title,operationtemperature,workingpressure,workingcurrent'.split(',')
 					let brr = {
 						id: row.id
 					}
-					for(let x in arr){
-						brr[arr[x]] = row[arr[x]]
-					}
+					brr.title = row.title;
+					brr.operationtemperature = row.operationtemperature;
+					brr.workingpressure = row.workingpressure;
+					brr.workingcurrent = row.workingCurrent;
 					this.$http({
 						url: 'devicedetectionforecast/forecast',
 						method: 'post',

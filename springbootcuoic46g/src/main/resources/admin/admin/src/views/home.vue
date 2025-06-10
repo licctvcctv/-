@@ -41,7 +41,28 @@
 				<div class="ql-snow ql-editor" v-html="newsDetail.content"></div>
 			</div>
 		</el-dialog>
-	
+
+		<!-- Latest Prediction -->
+		<div v-if="latestPrediction" class="latest-prediction-box animate__animated" id="latest-prediction-box">
+			<div class="prediction-title">最新设备状态预测结果</div>
+			<el-card class="box-card">
+				<div slot="header" class="clearfix">
+					<span>预测详情: {{ latestPrediction.title }}</span>
+				</div>
+				<el-row :gutter="20">
+					<el-col :span="12"><div class="grid-content"><strong>工作温度:</strong> {{ latestPrediction.operationtemperature }} °C</div></el-col>
+					<el-col :span="12"><div class="grid-content"><strong>工作压力:</strong> {{ latestPrediction.workingpressure }} kPa</div></el-col>
+				</el-row>
+				<el-row :gutter="20">
+					<el-col :span="12"><div class="grid-content"><strong>工作电流:</strong> {{ latestPrediction.workingCurrent }} A</div></el-col>
+					 <el-col :span="12"><div class="grid-content"><strong><i class="el-icon-s-opportunity"></i> 设备状态:</strong> <el-tag type="success">{{ latestPrediction.equipmentstatus }}</el-tag></div></el-col>
+				</el-row>
+				 <el-row v-if="latestPrediction.updatetime" :gutter="20">
+					<el-col :span="24"><div class="grid-content"><strong>预测时间:</strong> {{ latestPrediction.updatetime }}</div></el-col>
+				</el-row>
+			</el-card>
+		</div>
+
 		<!-- echarts -->
 		<!-- 5 -->
 		<div class="type5">
@@ -49,7 +70,7 @@
 			<div id="devicedetectionChart2" class="echarts2 animate__animated" v-if="isAuth('devicedetection','首页统计')"></div>
 			<div id="devicedetectionChart3" class="echarts3 animate__animated" v-if="isAuth('devicedetection','首页统计')"></div>
 			<div id="devicedetectionChart4" class="echarts4 animate__animated" v-if="isAuth('devicedetection','首页统计')"></div>
-			<div id="devicedetectionChart5" class="echarts5 animate__animated" v-if="isAuth('devicedetection','首页统计')"></div>
+			<div id="devicedetectionChartWorkingCurrent" class="echarts5 animate__animated" v-if="isAuth('devicedetection','首页统计')"></div>
 		</div>
 	</div>
 </template>
@@ -62,6 +83,7 @@ export default {
 	data() {
 		return {
 			devicedetectionCount: 0,
+			latestPrediction: null,
 			line: {"backgroundColor":"","yAxis":{"axisLabel":{"borderType":"solid","rotate":0,"padding":0,"shadowOffsetX":0,"margin":15,"backgroundColor":"transparent","borderColor":"#000","shadowOffsetY":0,"color":"#333","shadowBlur":0,"show":true,"inside":false,"ellipsis":"...","overflow":"none","borderRadius":0,"borderWidth":0,"width":"","fontSize":12,"lineHeight":24,"shadowColor":"transparent","fontWeight":"normal","height":""},"axisTick":{"show":true,"length":5,"lineStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"cap":"butt","color":"#333","shadowBlur":0,"width":1,"type":"solid","opacity":1,"shadowColor":"rgba(0,0,0,.5)"},"inside":false},"splitLine":{"lineStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"cap":"butt","color":"#666","shadowBlur":0,"width":1,"type":"solid","opacity":1,"shadowColor":"rgba(0,0,0,.5)"},"show":true},"minInterval":1,"axisLine":{"lineStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"cap":"butt","color":"#333","shadowBlur":0,"width":1,"type":"solid","opacity":1,"shadowColor":"rgba(0,0,0,.5)"},"show":true},"splitArea":{"show":false,"areaStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"color":"rgba(25,25,25,0.3)","opacity":1,"shadowBlur":10,"shadowColor":"rgba(0,0,0,.5)"}}},"xAxis":{"axisLabel":{"borderType":"solid","rotate":30,"padding":0,"shadowOffsetX":0,"margin":10,"backgroundColor":"transparent","borderColor":"#000","shadowOffsetY":0,"color":"#333","shadowBlur":0,"show":true,"inside":false,"ellipsis":"...","overflow":"truncate","borderRadius":0,"borderWidth":0,"width":120,"interval":0,"fontSize":12,"lineHeight":24,"shadowColor":"transparent","fontWeight":"normal","height":""},"axisTick":{"show":true,"length":5,"lineStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"cap":"butt","color":"#333","shadowBlur":0,"width":1,"type":"solid","opacity":1,"shadowColor":"rgba(0,0,0,.5)"},"inside":false},"splitLine":{"lineStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"cap":"butt","color":"#333","shadowBlur":0,"width":1,"type":"solid","opacity":1,"shadowColor":"rgba(0,0,0,.5)"},"show":false},"axisLine":{"lineStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"cap":"butt","color":"","shadowBlur":0,"background":"red","width":1,"type":"solid","opacity":1,"shadowColor":"rgba(0,0,0,.5)"},"show":true},"splitArea":{"show":false,"areaStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"color":"rgba(25,25,25,.3)","opacity":1,"shadowBlur":10,"shadowColor":"rgba(0,0,0,.5)"}}},"color":["#5470c6","#91cc75","#fac858","#ee6666","#73c0de","#3ba272","#fc8452","#9a60b4","#ea7ccc"],"legend":{"padding":0,"itemGap":10,"shadowOffsetX":0,"backgroundColor":"transparent","borderColor":"#666","shadowOffsetY":0,"orient":"horizontal","shadowBlur":0,"bottom":"auto","itemHeight":14,"show":true,"icon":"roundRect","itemStyle":{"borderType":"solid","shadowOffsetX":0,"borderColor":"inherit","shadowOffsetY":0,"color":"#333","shadowBlur":0,"borderWidth":0,"opacity":1,"shadowColor":"transparent"},"right":"auto","top":"auto","borderRadius":0,"lineStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"color":"inherit","shadowBlur":0,"width":"auto","type":"inherit","opacity":1,"shadowColor":"transparent"},"left":"right","borderWidth":0,"width":"80%","itemWidth":20,"textStyle":{"textBorderWidth":0,"color":"#333","textShadowColor":"transparent","ellipsis":"...","overflow":"none","fontSize":12,"lineHeight":24,"textShadowOffsetX":0,"textShadowOffsetY":0,"textBorderType":"solid","fontWeight":500,"textBorderColor":"transparent","textShadowBlur":0},"shadowColor":"rgba(0,0,0,.3)","height":"auto"},"series":{"showSymbol":true,"symbol":"emptyCircle","symbolSize":4},"tooltip":{"backgroundColor":"#123","textStyle":{"color":"#fff"}},"title":{"borderType":"solid","padding":0,"shadowOffsetX":0,"backgroundColor":"transparent","borderColor":"#666","shadowOffsetY":0,"shadowBlur":0,"bottom":"auto","show":true,"right":"auto","top":"auto","borderRadius":0,"left":"left","borderWidth":0,"textStyle":{"textBorderWidth":0,"color":"#333","textShadowColor":"transparent","fontSize":14,"lineHeight":24,"textShadowOffsetX":0,"textShadowOffsetY":0,"textBorderType":"solid","fontWeight":600,"textBorderColor":"#666","textShadowBlur":0},"shadowColor":"transparent"}},
 			bar: {"backgroundColor":"transparent","yAxis":{"axisLabel":{"borderType":"solid","rotate":0,"padding":0,"shadowOffsetX":0,"margin":12,"backgroundColor":"transparent","borderColor":"#666","shadowOffsetY":0,"color":"#333","shadowBlur":0,"show":true,"inside":false,"ellipsis":"...","overflow":"none","borderRadius":0,"borderWidth":0,"width":"","fontSize":12,"lineHeight":24,"shadowColor":"transparent","fontWeight":"normal","height":""},"axisTick":{"show":true,"length":5,"lineStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"cap":"butt","color":"#333","shadowBlur":0,"width":1,"type":"solid","opacity":1,"shadowColor":"rgba(0,0,0,.5)"},"inside":false},"splitLine":{"lineStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"cap":"butt","color":"#666","shadowBlur":0,"width":1,"type":"solid","opacity":1,"shadowColor":"rgba(0,0,0,.5)"},"show":true},"minInterval":1,"axisLine":{"lineStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"cap":"butt","color":"#333","shadowBlur":0,"width":1,"type":"solid","opacity":1,"shadowColor":"rgba(0,0,0,.5)"},"show":true},"splitArea":{"show":false,"areaStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"color":"rgba(25,25,25,0.3)","opacity":1,"shadowBlur":10,"shadowColor":"rgba(0,0,0,.5)"}}},"xAxis":{"axisLabel":{"borderType":"solid","rotate":30,"padding":0,"shadowOffsetX":0,"margin":10,"backgroundColor":"transparent","borderColor":"#000","shadowOffsetY":0,"color":"#333","shadowBlur":0,"show":true,"inside":false,"ellipsis":"...","overflow":"truncate","borderRadius":0,"borderWidth":0,"width":120,"interval":0,"fontSize":12,"lineHeight":24,"shadowColor":"transparent","fontWeight":"normal","height":""},"axisTick":{"show":true,"length":5,"lineStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"cap":"butt","color":"#333","shadowBlur":0,"width":1,"type":"solid","opacity":1,"shadowColor":"rgba(0,0,0,.5)"},"inside":false},"splitLine":{"lineStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"cap":"butt","color":"#333","shadowBlur":0,"width":1,"type":"solid","opacity":1,"shadowColor":"rgba(0,0,0,.5)"},"show":false},"axisLine":{"lineStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"cap":"butt","color":"#333","shadowBlur":0,"width":1,"type":"solid","opacity":1,"shadowColor":"rgba(0,0,0,.5)"},"show":true},"splitArea":{"show":false,"areaStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"color":"rgba(25,25,25,.3)","opacity":1,"shadowBlur":10,"shadowColor":"rgba(0,0,0,.5)"}}},"color":["#00ff00","#91cc75","#fac858","#ee6666","#73c0de","#3ba272","#fc8452","#9a60b4","#ea7ccc"],"legend":{"padding":0,"itemGap":10,"shadowOffsetX":0,"backgroundColor":"transparent","borderColor":"#666","shadowOffsetY":0,"orient":"horizontal","shadowBlur":0,"bottom":"auto","itemHeight":14,"show":true,"icon":"roundRect","itemStyle":{"borderType":"solid","shadowOffsetX":0,"borderColor":"inherit","shadowOffsetY":0,"color":"#333","shadowBlur":0,"borderWidth":0,"opacity":1,"shadowColor":"transparent"},"right":"auto","top":"auto","borderRadius":0,"lineStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"color":"inherit","shadowBlur":0,"width":"auto","type":"inherit","opacity":1,"shadowColor":"transparent"},"left":"right","borderWidth":0,"width":"80%","itemWidth":20,"textStyle":{"textBorderWidth":0,"color":"inherit","textShadowColor":"transparent","ellipsis":"...","overflow":"none","fontSize":12,"lineHeight":12,"textShadowOffsetX":0,"textShadowOffsetY":0,"textBorderType":"solid","fontWeight":500,"textBorderColor":"transparent","textShadowBlur":0},"shadowColor":"rgba(0,0,0,.3)","height":"auto"},"series":{"barWidth":"auto","itemStyle":{"borderType":"solid","shadowOffsetX":0,"borderColor":"#666","shadowOffsetY":0,"color":"","shadowBlur":0,"borderWidth":0,"opacity":1,"shadowColor":"#000"},"colorBy":"data","barCategoryGap":"20%"},"tooltip":{"backgroundColor":"#123","textStyle":{"color":"#fff"}},"title":{"borderType":"solid","padding":0,"shadowOffsetX":0,"backgroundColor":"transparent","borderColor":"#666","shadowOffsetY":0,"shadowBlur":0,"bottom":"auto","show":true,"right":"auto","top":"auto","borderRadius":0,"left":"left","borderWidth":0,"textStyle":{"textBorderWidth":0,"color":"#333","textShadowColor":"transparent","fontSize":14,"lineHeight":24,"textShadowOffsetX":0,"textShadowOffsetY":0,"textBorderType":"solid","fontWeight":600,"textBorderColor":"#666","textShadowBlur":0},"shadowColor":"transparent"},"base":{"animate":false,"interval":2000}},
 			pie: {"tooltip":{"backgroundColor":"#123","textStyle":{"color":"#fff"}},"backgroundColor":"transparent","color":["#5470c6","#91cc75","#fac858","#ee6666","#73c0de","#3ba272","#fc8452","#9a60b4","#ea7ccc"],"title":{"borderType":"solid","padding":[5,0,0,0],"shadowOffsetX":0,"backgroundColor":"transparent","borderColor":"#666","shadowOffsetY":0,"shadowBlur":0,"bottom":"auto","show":true,"right":"auto","top":"auto","borderRadius":0,"left":"left","borderWidth":0,"textStyle":{"textBorderWidth":0,"color":"#333","textShadowColor":"transparent","fontSize":14,"lineHeight":14,"textShadowOffsetX":0,"textShadowOffsetY":0,"textBorderType":"solid","fontWeight":600,"textBorderColor":"#666","textShadowBlur":0},"shadowColor":"transparent"},"legend":{"padding":[5,0,0,0],"itemGap":10,"shadowOffsetX":0,"backgroundColor":"transparent","borderColor":"#666","shadowOffsetY":0,"orient":"horizontal","shadowBlur":0,"bottom":"auto","itemHeight":2,"show":true,"icon":"roundRect","itemStyle":{"borderType":"solid","shadowOffsetX":0,"borderColor":"inherit","shadowOffsetY":0,"color":"inherit","shadowBlur":0,"borderWidth":0,"opacity":1,"shadowColor":"transparent"},"right":0,"top":"auto","borderRadius":0,"lineStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"color":"inherit","shadowBlur":0,"width":"auto","type":"inherit","opacity":1,"shadowColor":"transparent"},"left":"right","borderWidth":0,"width":"80%","itemWidth":2,"textStyle":{"textBorderWidth":0,"color":"inherit","textShadowColor":"transparent","ellipsis":"...","overflow":"none","fontSize":12,"lineHeight":12,"textShadowOffsetX":0,"textShadowOffsetY":0,"textBorderType":"solid","fontWeight":500,"textBorderColor":"transparent","textShadowBlur":0},"shadowColor":"rgba(0,0,0,.3)","height":"auto"},"series":{"itemStyle":{"borderType":"solid","shadowOffsetX":0,"borderColor":"#666","shadowOffsetY":0,"color":"","shadowBlur":0,"borderWidth":0,"opacity":1,"shadowColor":"#000"},"label":{"borderType":"solid","rotate":0,"padding":0,"textBorderWidth":0,"backgroundColor":"transparent","borderColor":"#666","color":"inherit","show":true,"textShadowColor":"transparent","distanceToLabelLine":5,"ellipsis":"...","overflow":"none","borderRadius":0,"borderWidth":0,"fontSize":12,"lineHeight":18,"textShadowOffsetX":0,"position":"outside","textShadowOffsetY":0,"textBorderType":"solid","textBorderColor":"#666","textShadowBlur":0},"labelLine":{"show":true,"length":10,"lineStyle":{"shadowOffsetX":0,"shadowOffsetY":0,"color":"#666","shadowBlur":0,"width":1,"type":"solid","opacity":1,"shadowColor":"#000"},"length2":14,"smooth":false}}},
@@ -76,6 +98,7 @@ export default {
 	mounted(){
 		this.init();
 		this.getdevicedetectionCount();
+		this.getLatestPrediction();
 		if(this.isAuth('devicedetection','首页统计')){
 			this.devicedetectionChat1();
 		}
@@ -89,7 +112,7 @@ export default {
 			this.devicedetectionChat4();
 		}
 		if(this.isAuth('devicedetection','首页统计')){
-			this.devicedetectionChat5();
+			this.devicedetectionChatWorkingCurrent();
 		}
 		window.addEventListener('scroll', this.handleScroll)
 		setTimeout(()=>{
@@ -107,13 +130,14 @@ export default {
 				{id:'home-title',css:'animate__fadeInUp'},
 				{id:'statis1',css:'animate__fadeInUp'},
 				{id:'news-box',css:'animate__fadeInUp'},
+				{id:'latest-prediction-box',css:'animate__fadeInUp'},
 				{id:'devicedetectionChart1',css:'animate__fadeInUp'},
 				{id:'devicedetectionChart2',css:'animate__fadeInUp'},
 				{id:'devicedetectionChart3',css:'animate__fadeInUp'},
 				{id:'devicedetectionChart4',css:'animate__fadeInUp'},
-				{id:'devicedetectionChart5',css:'animate__fadeInUp'},
+				{id:'devicedetectionChartWorkingCurrent',css:'animate__fadeInUp'},
 			]
-			
+
 			for (let i in arr) {
 				let doc = document.getElementById(arr[i].id)
 				if (doc) {
@@ -135,7 +159,7 @@ export default {
 					xAxisData.push(xAxis)
 					let series = seriesData.shift()
 					seriesData.push(series)
-				
+
 					if (type == 1) {
 						myChart.setOption({
 							xAxis: [{
@@ -207,6 +231,25 @@ export default {
 				}
 			})
 		},
+		getLatestPrediction() {
+			this.$http({
+				url: `devicedetectionforecast/latestPredicted`,
+				method: "get"
+			}).then(({ data }) => {
+				if (data && data.code === 0 && data.data) {
+					this.latestPrediction = data.data;
+				} else {
+					this.latestPrediction = null;
+					if(data.msg && data.msg !== 'No predicted forecasts found.') {
+					  // this.$message.error(data.msg);
+					}
+				}
+			}).catch(err => {
+				this.latestPrediction = null;
+				// console.error("Error fetching latest prediction:", err);
+				// this.$message.error("获取最新预测失败");
+			});
+		},
 // 1234 折滑面
 		devicedetectionChat1() {
 			this.$nextTick(()=>{
@@ -235,18 +278,18 @@ export default {
 						var option = {};
 						let titleObj = this.line.title
 						titleObj.text = '工作温度'
-						
+
 						const legendObj = this.line.legend
 						let tooltipObj = { trigger: 'item',formatter: '{b} : {c}'}
 						tooltipObj = Object.assign(tooltipObj , this.line.tooltip?this.line.tooltip:{})
 						let xAxisObj = this.line.xAxis
 						xAxisObj.type = 'category'
 						xAxisObj.data = xAxis
-						
+
 						let yAxisObj = this.line.yAxis
 						yAxisObj.type = 'value'
 						const gridObj = this.line.grid
-						
+
 						let seriesObj = {
 							data: yAxis,
 							type: 'line',
@@ -267,10 +310,85 @@ export default {
 						};
 						// 使用刚指定的配置项和数据显示图表。
 						devicedetectionChart1.setOption(option);
-				
+
 						//根据窗口的大小变动图表
 						window.onresize = function() {
 							devicedetectionChart1.resize();
+						};
+					}else{
+						this.$message({
+							message: data.msg,
+							type: "warning",
+							duration: 1500,
+						})
+					}
+				});
+			})
+		},
+
+		devicedetectionChatWorkingCurrent() {
+			this.$nextTick(()=>{
+
+				var devicedetectionChartWorkingCurrent = echarts.init(document.getElementById("devicedetectionChartWorkingCurrent"),'macarons');
+				this.$http({
+					url: `devicedetection/value/detectiontime/workingcurrent/日`,
+					method: "get",
+				}).then(({ data }) => {
+					if (data && data.code === 0) {
+						let res = data.data;
+						let xAxis = [];
+						let yAxis = [];
+						let pArray = []
+						for(let i=0;i<res.length;i++){
+							if(this.boardBase&&i==this.boardBase.lineNum){
+								break;
+							}
+							xAxis.push(res[i].detectiontime);
+							yAxis.push(parseFloat((res[i].total)));
+							pArray.push({
+								value: parseFloat((res[i].total)),
+								name: res[i].detectiontime
+							})
+						}
+						var option = {};
+						let titleObj = this.line.title
+						titleObj.text = '工作电流'
+
+						const legendObj = this.line.legend
+						let tooltipObj = { trigger: 'item',formatter: '{b} : {c}'}
+						tooltipObj = Object.assign(tooltipObj , this.line.tooltip?this.line.tooltip:{})
+						let xAxisObj = this.line.xAxis
+						xAxisObj.type = 'category'
+						xAxisObj.data = xAxis
+
+						let yAxisObj = this.line.yAxis
+						yAxisObj.type = 'value'
+						const gridObj = this.line.grid
+
+						let seriesObj = {
+							data: yAxis,
+							type: 'line',
+							areaStyle: {},
+							smooth: true
+						}
+						seriesObj = Object.assign(seriesObj , this.line.series)
+						option = {
+							backgroundColor: this.line.backgroundColor,
+							color: this.line.color,
+							title: titleObj,
+							legend: legendObj,
+							grid: gridObj,
+							tooltip: tooltipObj,
+							xAxis: xAxisObj,
+							yAxis: yAxisObj,
+							series: [seriesObj]
+						};
+						// 使用刚指定的配置项和数据显示图表。
+						devicedetectionChartWorkingCurrent.setOption(option);
+
+						//根据窗口的大小变动图表
+						window.onresize = function() {
+							devicedetectionChartWorkingCurrent.resize();
 						};
 					}else{
 						this.$message({
@@ -310,25 +428,25 @@ export default {
 						var option = {};
 						let titleObj = this.line.title
 						titleObj.text = '工作压力'
-						
+
 						const legendObj = this.line.legend
 						let tooltipObj = { trigger: 'item',formatter: '{b} : {c}'}
 						tooltipObj = Object.assign(tooltipObj , this.line.tooltip?this.line.tooltip:{})
-						
+
 						let xAxisObj = this.line.xAxis
 						xAxisObj.type = 'category'
 						xAxisObj.data = xAxis
-						
+
 						let yAxisObj = this.line.yAxis
 						yAxisObj.type = 'value'
-						
+
 						let seriesObj = {
 							data: yAxis,
 							type: 'line',
 						}
 						seriesObj = Object.assign(seriesObj , this.line.series)
 						const gridObj = this.line.grid
-						
+
 						option = {
 							backgroundColor: this.line.backgroundColor,
 							color: this.line.color,
@@ -342,7 +460,7 @@ export default {
 						};
 						// 使用刚指定的配置项和数据显示图表。
 						devicedetectionChart2.setOption(option);
-				
+
 						//根据窗口的大小变动图表
 						window.onresize = function() {
 							devicedetectionChart2.resize();
@@ -581,18 +699,18 @@ export default {
 						var option = {};
 						let titleObj = this.bar.title
 						titleObj.text = '工作时长'
-						
+
 						const legendObj = this.bar.legend
 						let tooltipObj = {trigger: 'item',formatter: '{b} : {c}'}
 						tooltipObj = Object.assign(tooltipObj , this.bar.tooltip?this.bar.tooltip:{})
-				
+
 						let xAxisObj = this.bar.xAxis
 						xAxisObj.type = 'category'
 						xAxisObj.data = xAxis
-						
+
 						let yAxisObj = this.bar.yAxis
 						yAxisObj.type = 'value'
-				
+
 						let seriesObj = {
 							data: yAxis,
 							type: 'bar',
@@ -617,78 +735,6 @@ export default {
 						//根据窗口的大小变动图表
 						window.onresize = function() {
 							devicedetectionChart4.resize();
-						};
-					}else{
-						this.$message({
-							message: data.msg,
-							type: "warning",
-							duration: 1500,
-						})
-					}
-				});
-			})
-		},
-		devicedetectionChat5() {
-			this.$nextTick(()=>{
-
-				var devicedetectionChart5 = echarts.init(document.getElementById("devicedetectionChart5"),'macarons');
-				this.$http({
-					url: "devicedetection/group/protectiongrade",
-					method: "get",
-				}).then(({ data }) => {
-					if (data && data.code === 0) {
-						let res = data.data;
-						let xAxis = [];
-						let yAxis = [];
-						let pArray = []
-						for(let i=0;i<res.length;i++){
-							if(this.boardBase&&i==this.boardBase.pieNum){
-								break;
-							}
-							xAxis.push(res[i].protectiongrade);
-							yAxis.push(parseFloat((res[i].total)));
-							pArray.push({
-								value: parseFloat((res[i].total)),
-								name: res[i].protectiongrade
-							})
-						}
-						var option = {};
-						let titleObj = this.pie.title
-						titleObj.text = '防护等级'
-						
-						const legendObj = this.pie.legend
-						let tooltipObj = {trigger: 'item',formatter: '{b} : {c} ({d}%)'}
-						tooltipObj = Object.assign(tooltipObj , this.pie.tooltip?this.pie.tooltip:{})
-						
-						let seriesObj = {
-							type: 'pie',
-							radius: '55%',
-							center: ['50%', '60%'],
-							data: pArray,
-							emphasis: {
-								itemStyle: {
-									shadowBlur: 10,
-									shadowOffsetX: 0,
-									shadowColor: 'rgba(0, 0, 0, 0.5)'
-								}
-							}
-						}
-						seriesObj = Object.assign(seriesObj , this.pie.series)
-						const gridObj = this.pie.grid
-						option = {
-							backgroundColor: this.pie.backgroundColor,
-							color: this.pie.color,
-							title: titleObj,
-							legend: legendObj,
-							tooltip: tooltipObj,
-							series: [seriesObj],
-							grid: gridObj
-						};
-						// 使用刚指定的配置项和数据显示图表。
-						devicedetectionChart5.setOption(option);
-						//根据窗口的大小变动图表
-						window.onresize = function() {
-							devicedetectionChart5.resize();
 						};
 					}else{
 						this.$message({
@@ -1067,6 +1113,38 @@ export default {
 		.news-box:hover {
 			transform: translate3d(0, 0px, 0);
 		}
+		.latest-prediction-box {
+			border: 0px solid #ccc;
+			padding: 20px;
+			margin: 10px;
+			border-radius: 10px;
+			box-shadow: 0 0px 0px rgba(0,0,0,.3);
+			background: #fff;
+			width: calc(100% - 20px); /* Adjust width as needed */
+		}
+		.prediction-title {
+			padding: 0 2px;
+			margin: 0 0 20px;
+			color: #000;
+			font-weight: 600;
+			width: 100%;
+			font-size: 20px;
+			border-color: #ddd;
+			border-width: 0 0 2px;
+			line-height: 44px;
+			border-style: solid;
+		}
+		.latest-prediction-box .el-card {
+			border-radius: 8px;
+		}
+		.latest-prediction-box .grid-content {
+			padding: 10px 0;
+			font-size: 14px;
+		}
+		.latest-prediction-box .el-tag {
+			font-size: 14px;
+			font-weight: bold;
+		}
 		// echarts5
 		.type5 {
 			padding: 0;
@@ -1155,14 +1233,14 @@ export default {
 			}
 		}
 	}
-	
+
 	.echarts-flag-2 {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
 		padding: 10px 20px;
 		background: rebeccapurple;
-	
+
 		&>div {
 			width: 32%;
 			height: 300px;

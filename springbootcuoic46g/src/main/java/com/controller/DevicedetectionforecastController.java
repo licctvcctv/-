@@ -1,4 +1,4 @@
-                                                                package com.controller;
+package com.controller;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -42,12 +42,12 @@ import java.util.*;
 import java.util.stream.Stream;
 import cn.hutool.core.date.DateUtil;
             import weka.classifiers.trees.RandomForest;
-        
+
 /**
  * 故障预测
  * 后端接口
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2025-06-08 19:56:16
  */
 @RestController
@@ -57,16 +57,16 @@ public class DevicedetectionforecastController {
     private DevicedetectionforecastService devicedetectionforecastService;
             @Autowired
         private DevicedetectionService devicedetectionService;
-                
-    
-    
-    
-    
 
 
-    
-    
-    
+
+
+
+
+
+
+
+
     /**
      * 后台列表
      */
@@ -75,8 +75,8 @@ public class DevicedetectionforecastController {
                                                                                 HttpServletRequest request){
                                     //设置查询条件
         EntityWrapper<DevicedetectionforecastEntity> ew = new EntityWrapper<DevicedetectionforecastEntity>();
-                                                                                                                    
-        
+
+
                 //查询结果
         PageUtils page = devicedetectionforecastService.queryPage(params, MPUtil.sort(MPUtil.between(MPUtil.likeOrEq(ew, devicedetectionforecast), params), params));
         Map<String, String> deSens = new HashMap<>();
@@ -94,7 +94,7 @@ public class DevicedetectionforecastController {
                                                                                 HttpServletRequest request){
                 //设置查询条件
         EntityWrapper<DevicedetectionforecastEntity> ew = new EntityWrapper<DevicedetectionforecastEntity>();
-                                                                                                                    
+
                 //查询结果
         PageUtils page = devicedetectionforecastService.queryPage(params, MPUtil.sort(MPUtil.between(MPUtil.likeOrEq(ew, devicedetectionforecast), params), params));
         Map<String, String> deSens = new HashMap<>();
@@ -104,7 +104,7 @@ public class DevicedetectionforecastController {
     }
 
 
-    
+
             /**
          * 列表
          */
@@ -114,7 +114,7 @@ public class DevicedetectionforecastController {
         ew.allEq(MPUtil.allEQMapPre( devicedetectionforecast, "devicedetectionforecast"));
         return R.ok().put("data", devicedetectionforecastService.selectListView(ew));
         }
-    
+
     /**
     * 查询
     */
@@ -151,9 +151,9 @@ public class DevicedetectionforecastController {
         return R.ok().put("data", devicedetectionforecast);
     }
 
-    
-    
-    
+
+
+
     /**
      * 后台保存
      */
@@ -174,9 +174,9 @@ public class DevicedetectionforecastController {
         return R.ok().put("data",devicedetectionforecast.getId());
     }
 
-    
-    
-    
+
+
+
 
     /**
      * 修改
@@ -190,10 +190,10 @@ public class DevicedetectionforecastController {
                         return R.ok();
     }
 
-    
 
-    
-    
+
+
+
     /**
      * 删除
      */
@@ -203,21 +203,47 @@ public class DevicedetectionforecastController {
         return R.ok();
     }
 
-        
 
-    
-    
-    
-    
-    
-            
+
+
+
+
+
+
+    /**
+     * 获取最新预测的故障信息
+     */
+    @RequestMapping("/latestPredicted")
+    public R getLatestPredictedForecast() {
+        EntityWrapper<DevicedetectionforecastEntity> ew = new EntityWrapper<>();
+        ew.isNotNull("equipmentstatus");
+        ew.ne("equipmentstatus", "");
+        ew.orderBy("id", false); // Order by id descending
+
+        List<DevicedetectionforecastEntity> list = devicedetectionforecastService.selectList(ew);
+
+        DevicedetectionforecastEntity latestForecast = null;
+        if (list != null && !list.isEmpty()) {
+            latestForecast = list.get(0); // Get the first element, which is the latest due to ordering
+        }
+
+        if (latestForecast != null) {
+            // Optionally desensitize if needed, similar to other methods
+            // Map<String, String> deSens = new HashMap<>();
+            // DeSensUtil.desensitize(latestForecast,deSens);
+            return R.ok().put("data", latestForecast);
+        } else {
+            return R.ok().put("data", null).put("msg", "No predicted forecasts found.");
+        }
+    }
+
             /**
         * 预测算法
         */
         @RequestMapping("/forecast")
         public R forecast(@RequestBody Map<String, Object> params) throws Exception {
         // 特征值
-        String[] eigenValueArr = "title,operationtemperature,workingpressure".split(",");
+        String[] eigenValueArr = "title,operationtemperature,workingpressure,workingcurrent".split(",");
         // 目标值
         String[] targetValueArr = "equipmentstatus".split(",");
                 String[] sqlSelectArr = Stream.of(eigenValueArr, targetValueArr).flatMap(Arrays::stream).toArray(String[]::new);
@@ -311,7 +337,7 @@ public class DevicedetectionforecastController {
             }
             return forecastRes;
         }
-        
+
         /**
          * 训练模型
          */

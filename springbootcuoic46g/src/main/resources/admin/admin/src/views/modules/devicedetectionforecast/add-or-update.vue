@@ -26,6 +26,12 @@
 				<el-form-item v-else class="input" label="工作压力" prop="workingpressure" >
 					<el-input v-model="ruleForm.workingpressure" placeholder="工作压力" readonly></el-input>
 				</el-form-item>
+				<el-form-item class="input" v-if="type!='info'"  label="工作电流" prop="workingCurrent" >
+					<el-input-number v-model="ruleForm.workingCurrent" placeholder="工作电流" :disabled="ro.workingCurrent"></el-input-number>
+				</el-form-item>
+				<el-form-item v-else class="input" label="工作电流" prop="workingCurrent" >
+					<el-input v-model="ruleForm.workingCurrent" placeholder="工作电流" readonly></el-input>
+				</el-form-item>
 				<el-form-item class="input" v-if="type!='info'"  label="设备状态" prop="equipmentstatus" >
 					<el-input v-model="ruleForm.equipmentstatus" placeholder="设备状态" clearable  :readonly="ro.equipmentstatus"></el-input>
 				</el-form-item>
@@ -48,12 +54,12 @@
 				</el-button>
 			</el-form-item>
 		</el-form>
-    
+
 
 	</div>
 </template>
 <script>
-	import { 
+	import {
 		isNumber,
 	} from "@/utils/validate";
 	export default {
@@ -70,19 +76,21 @@
 			return {
 				id: '',
 				type: '',
-			
-			
+
+
 				ro:{
 					title : false,
 					operationtemperature : false,
 					workingpressure : false,
+					workingCurrent : false,
 					equipmentstatus : false,
 				},
-			
+
 				ruleForm: {
 					title: '',
 					operationtemperature: '',
 					workingpressure: '',
+					workingCurrent: '',
 					equipmentstatus: '',
 				},
 
@@ -93,6 +101,9 @@
 						{ validator: validateNumber, trigger: 'blur' },
 					],
 					workingpressure: [
+						{ validator: validateNumber, trigger: 'blur' },
+					],
+					workingCurrent: [
 						{ validator: validateNumber, trigger: 'blur' },
 					],
 					equipmentstatus: [
@@ -147,6 +158,11 @@
 							this.ro.workingpressure = true;
 							continue;
 						}
+						if(o=='workingCurrent'){
+							this.ruleForm.workingCurrent = obj[o];
+							this.ro.workingCurrent = true;
+							continue;
+						}
 						if(o=='equipmentstatus'){
 							this.ruleForm.equipmentstatus = obj[o];
 							this.ro.equipmentstatus = true;
@@ -165,7 +181,7 @@
 						this.$message.error(data.msg);
 					}
 				});
-			
+
 			},
 			// 多级联动参数
 
@@ -212,7 +228,7 @@
 									}
 								}
 							}
-							
+
 							await this.$http({
 								url: `devicedetectionforecast/${!this.ruleForm.id ? "save" : "update"}`,
 								method: "post",
@@ -270,11 +286,11 @@
 		width: 100%;
 		height: 500px;
 	}
-	
+
 	.search-box {
 		position: absolute;
 	}
-	
+
 	.el-date-editor.el-input {
 		width: auto;
 	}
@@ -294,7 +310,7 @@
 		line-height: 40px;
 		text-align: right;
 	}
-	
+
 	.add-update-preview .el-form-item /deep/ .el-form-item__content {
 		margin-left: 180px;
 	}
@@ -311,7 +327,7 @@
 		line-height: 40px;
 		min-width: 100%;
 	}
-	
+
 	.add-update-preview .el-input {
 		width: 100%;
 	}
@@ -490,7 +506,7 @@
 		line-height: initial;
 		vertical-align: middle;
 	}
-	
+
 	.add-update-preview /deep/ .upload .upload-img {
 		border: 1px solid #ccc;
 		cursor: pointer;
@@ -503,7 +519,7 @@
 		text-align: center;
 		height: 60px;
 	}
-	
+
 	.add-update-preview /deep/ .el-upload-list .el-upload-list__item {
 		border: 1px solid #ccc;
 		cursor: pointer;
@@ -516,7 +532,7 @@
 		text-align: center;
 		height: 60px;
 	}
-	
+
 	.add-update-preview /deep/ .el-upload .el-icon-plus {
 		border: 1px solid #ccc;
 		cursor: pointer;
@@ -533,7 +549,7 @@
 		color: #666;
 		font-size: 15px;
 	}
-	
+
 	.add-update-preview .el-textarea /deep/ .el-textarea__inner {
 		border: 1px solid #ccc;
 		border-radius: 0px;

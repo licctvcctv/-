@@ -8,6 +8,7 @@
         <result property="title" column="title"/>
         <result property="operationtemperature" column="operationtemperature"/>
         <result property="workingpressure" column="workingpressure"/>
+        <result property="workingCurrent" column="workingcurrent"/>
         <result property="equipmentstatus" column="equipmentstatus"/>
     </resultMap>
 

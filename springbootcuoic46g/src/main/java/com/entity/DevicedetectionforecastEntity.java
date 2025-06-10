@@ -24,8 +24,8 @@ import com.baomidou.mybatisplus.enums.IdType;
 /**
  * 故障预测
  * 数据库通用操作实体类（普通增删改查）
- * @author 
- * @email 
+ * @author
+ * @email
  * @date 2025-06-08 19:56:16
  */
 @TableName("devicedetectionforecast")
@@ -34,9 +34,9 @@ public class DevicedetectionforecastEntity<T> implements Serializable {
 
 
 	public DevicedetectionforecastEntity() {
-		
+
 	}
-	
+
 	public DevicedetectionforecastEntity(T t) {
 		try {
 			BeanUtils.copyProperties(this, t);
@@ -45,7 +45,7 @@ public class DevicedetectionforecastEntity<T> implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 主键id
 	 */
@@ -54,28 +54,34 @@ public class DevicedetectionforecastEntity<T> implements Serializable {
 	/**
 	 * 名称
 	 */
-					
+
 	private String title;
-	
+
 	/**
 	 * 工作温度
 	 */
-					
+
 	private Double operationtemperature;
-	
+
 	/**
 	 * 工作压力
 	 */
-					
+
 	private Double workingpressure;
-	
+
 	/**
 	 * 设备状态
 	 */
-					
+
 	private String equipmentstatus;
-	
-	
+
+	/**
+	 * 工作电流
+	 */
+
+	private String workingCurrent;
+
+
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat
 	private Date addtime;
@@ -143,4 +149,16 @@ public class DevicedetectionforecastEntity<T> implements Serializable {
 		return equipmentstatus;
 	}
 
+	/**
+	 * 设置：工作电流
+	 */
+	public void setWorkingCurrent(String workingCurrent) {
+		this.workingCurrent = workingCurrent;
+	}
+	/**
+	 * 获取：工作电流
+	 */
+	public String getWorkingCurrent() {
+		return workingCurrent;
+	}
 }
