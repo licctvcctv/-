@@ -1049,21 +1049,21 @@
 					method: "get",
 				}).then(({ data }) => {
 					if (data && data.code == 0 && data.count>0 ) {
-						const h = this.$createElement;
-						var name = data.data.join(',')
-						this.$msgbox({
-							message: h('p', null, [
-								h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `额定电压(kv)预警`),
-								h('p', null, [
-									h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
-									h('div', { style: 'text-align: center' }, [
-										h('span', null, `包含：`),
-										h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
-									])
-								])
-							]),
-							showCancelButton: false,
-						})
+						// const h = this.$createElement;
+						// var name = data.data.join(',')
+						// this.$msgbox({
+						// 	message: h('p', null, [
+						// 		h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `工作压力预警`),
+						// 		h('p', null, [
+						// 			h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
+						// 			h('div', { style: 'text-align: center' }, [
+						// 				h('span', null, `包含：`),
+						// 				h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
+						// 			])
+						// 		])
+						// 	]),
+						// 	showCancelButton: false,
+						// })
 					}
 				});
 				let urlratedfrequencyhz = 'devicedetection/remind/ratedfrequencyhz/1';
@@ -1076,21 +1076,21 @@
 					method: "get",
 				}).then(({ data }) => {
 					if (data && data.code == 0 && data.count>0 ) {
-						const h = this.$createElement;
-						var name = data.data.join(',')
-						this.$msgbox({
-							message: h('p', null, [
-								h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `额定频率(Hz)预警`),
-								h('p', null, [
-									h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
-									h('div', { style: 'text-align: center' }, [
-										h('span', null, `包含：`),
-										h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
-									])
-								])
-							]),
-							showCancelButton: false,
-						})
+						// const h = this.$createElement;
+						// var name = data.data.join(',')
+						// this.$msgbox({
+						// 	message: h('p', null, [
+						// 		h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `工作温度预警`),
+						// 		h('p', null, [
+						// 			h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
+						// 			h('div', { style: 'text-align: center' }, [
+						// 				h('span', null, `包含：`),
+						// 				h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
+						// 			])
+						// 		])
+						// 	]),
+						// 	showCancelButton: false,
+						// })
 					}
 				});
 				let urlratedcurrent = 'devicedetection/remind/ratedcurrent/1';
@@ -1103,21 +1103,21 @@
 					method: "get",
 				}).then(({ data }) => {
 					if (data && data.code == 0 && data.count>0 ) {
-						const h = this.$createElement;
-						var name = data.data.join(',')
-						this.$msgbox({
-							message: h('p', null, [
-								h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `额定电流(A)预警`),
-								h('p', null, [
-									h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
-									h('div', { style: 'text-align: center' }, [
-										h('span', null, `包含：`),
-										h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
-									])
-								])
-							]),
-							showCancelButton: false,
-						})
+						// const h = this.$createElement;
+						// var name = data.data.join(',')
+						// this.$msgbox({
+						// 	message: h('p', null, [
+						// 		h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `工作时长预警`),
+						// 		h('p', null, [
+						// 			h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
+						// 			h('div', { style: 'text-align: center' }, [
+						// 				h('span', null, `包含：`),
+						// 				h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
+						// 			])
+						// 		])
+						// 	]),
+						// 	showCancelButton: false,
+						// })
 					}
 				});
 				let urlratedshortcircuitbreakingcurrentka = 'devicedetection/remind/ratedshortcircuitbreakingcurrentka/1';
@@ -1130,21 +1130,21 @@
 					method: "get",
 				}).then(({ data }) => {
 					if (data && data.code == 0 && data.count>0 ) {
-						const h = this.$createElement;
-						var name = data.data.join(',')
-						this.$msgbox({
-							message: h('p', null, [
-								h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `额定短路开断电流(kA)预警`),
-								h('p', null, [
-									h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
-									h('div', { style: 'text-align: center' }, [
-										h('span', null, `包含：`),
-										h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
-									])
-								])
-							]),
-							showCancelButton: false,
-						})
+						// const h = this.$createElement;
+						// var name = data.data.join(',')
+						// this.$msgbox({
+						// 	message: h('p', null, [
+						// 		h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `雷电冲击耐受电压(kV)预警`),
+						// 		h('p', null, [
+						// 			h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
+						// 			h('div', { style: 'text-align: center' }, [
+						// 				h('span', null, `包含：`),
+						// 				h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
+						// 			])
+						// 		])
+						// 	]),
+						// 	showCancelButton: false,
+						// })
 					}
 				});
 				let urleffectivevalueofratedshor = 'devicedetection/remind/effectivevalueofratedshor/1';
@@ -1157,21 +1157,21 @@
 					method: "get",
 				}).then(({ data }) => {
 					if (data && data.code == 0 && data.count>0 ) {
-						const h = this.$createElement;
-						var name = data.data.join(',')
-						this.$msgbox({
-							message: h('p', null, [
-								h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `额定短时耐受电流有效值(kA)预警`),
-								h('p', null, [
-									h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
-									h('div', { style: 'text-align: center' }, [
-										h('span', null, `包含：`),
-										h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
-									])
-								])
-							]),
-							showCancelButton: false,
-						})
+						// const h = this.$createElement;
+						// var name = data.data.join(',')
+						// this.$msgbox({
+						// 	message: h('p', null, [
+						// 		h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `工频耐受电压(kV)预警`),
+						// 		h('p', null, [
+						// 			h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
+						// 			h('div', { style: 'text-align: center' }, [
+						// 				h('span', null, `包含：`),
+						// 				h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
+						// 			])
+						// 		])
+						// 	]),
+						// 	showCancelButton: false,
+						// })
 					}
 				});
 				let urlratedshortcircuitclosingcurrent = 'devicedetection/remind/ratedshortcircuitclosingcurrent/1';
@@ -1184,21 +1184,21 @@
 					method: "get",
 				}).then(({ data }) => {
 					if (data && data.code == 0 && data.count>0 ) {
-						const h = this.$createElement;
-						var name = data.data.join(',')
-						this.$msgbox({
-							message: h('p', null, [
-								h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `额定短路关合电流(KA)预警`),
-								h('p', null, [
-									h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
-									h('div', { style: 'text-align: center' }, [
-										h('span', null, `包含：`),
-										h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
-									])
-								])
-							]),
-							showCancelButton: false,
-						})
+						// const h = this.$createElement;
+						// var name = data.data.join(',')
+						// this.$msgbox({
+						// 	message: h('p', null, [
+						// 		h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `额定峰值耐受电流(kA)预警`),
+						// 		h('p', null, [
+						// 			h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
+						// 			h('div', { style: 'text-align: center' }, [
+						// 				h('span', null, `包含：`),
+						// 				h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
+						// 			])
+						// 		])
+						// 	]),
+						// 	showCancelButton: false,
+						// })
 					}
 				});
 				let urlratedpeakwithstandcurrentka = 'devicedetection/remind/ratedpeakwithstandcurrentka/1';
@@ -1211,21 +1211,21 @@
 					method: "get",
 				}).then(({ data }) => {
 					if (data && data.code == 0 && data.count>0 ) {
-						const h = this.$createElement;
-						var name = data.data.join(',')
-						this.$msgbox({
-							message: h('p', null, [
-								h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `额定峰值耐受电流(kA)预警`),
-								h('p', null, [
-									h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
-									h('div', { style: 'text-align: center' }, [
-										h('span', null, `包含：`),
-										h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
-									])
-								])
-							]),
-							showCancelButton: false,
-						})
+						// const h = this.$createElement;
+						// var name = data.data.join(',')
+						// this.$msgbox({
+						// 	message: h('p', null, [
+						// 		h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `额定短路关合电流(KA)预警`),
+						// 		h('p', null, [
+						// 			h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
+						// 			h('div', { style: 'text-align: center' }, [
+						// 				h('span', null, `包含：`),
+						// 				h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
+						// 			])
+						// 		])
+						// 	]),
+						// 	showCancelButton: false,
+						// })
 					}
 				});
 				let urlpowerfrequencywithstan = 'devicedetection/remind/powerfrequencywithstan/1';
@@ -1238,21 +1238,21 @@
 					method: "get",
 				}).then(({ data }) => {
 					if (data && data.code == 0 && data.count>0 ) {
-						const h = this.$createElement;
-						var name = data.data.join(',')
-						this.$msgbox({
-							message: h('p', null, [
-								h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `工频耐受电压(kV)预警`),
-								h('p', null, [
-									h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
-									h('div', { style: 'text-align: center' }, [
-										h('span', null, `包含：`),
-										h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
-									])
-								])
-							]),
-							showCancelButton: false,
-						})
+						// const h = this.$createElement;
+						// var name = data.data.join(',')
+						// this.$msgbox({
+						// 	message: h('p', null, [
+						// 		h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `额定短时耐受电流有效值(kA)预警`),
+						// 		h('p', null, [
+						// 			h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
+						// 			h('div', { style: 'text-align: center' }, [
+						// 				h('span', null, `包含：`),
+						// 				h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
+						// 			])
+						// 		])
+						// 	]),
+						// 	showCancelButton: false,
+						// })
 					}
 				});
 				let urllightningimpulsewithstan = 'devicedetection/remind/lightningimpulsewithstan/1';
@@ -1265,21 +1265,21 @@
 					method: "get",
 				}).then(({ data }) => {
 					if (data && data.code == 0 && data.count>0 ) {
-						const h = this.$createElement;
-						var name = data.data.join(',')
-						this.$msgbox({
-							message: h('p', null, [
-								h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `雷电冲击耐受电压(kV)预警`),
-								h('p', null, [
-									h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
-									h('div', { style: 'text-align: center' }, [
-										h('span', null, `包含：`),
-										h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
-									])
-								])
-							]),
-							showCancelButton: false,
-						})
+						// const h = this.$createElement;
+						// var name = data.data.join(',')
+						// this.$msgbox({
+						// 	message: h('p', null, [
+						// 		h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `额定短路开断电流(kA)预警`),
+						// 		h('p', null, [
+						// 			h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
+						// 			h('div', { style: 'text-align: center' }, [
+						// 				h('span', null, `包含：`),
+						// 				h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
+						// 			])
+						// 		])
+						// 	]),
+						// 	showCancelButton: false,
+						// })
 					}
 				});
 				let urlrunningtime = 'devicedetection/remind/runningtime/1';
@@ -1292,21 +1292,21 @@
 					method: "get",
 				}).then(({ data }) => {
 					if (data && data.code == 0 && data.count>0 ) {
-						const h = this.$createElement;
-						var name = data.data.join(',')
-						this.$msgbox({
-							message: h('p', null, [
-								h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `工作时长预警`),
-								h('p', null, [
-									h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
-									h('div', { style: 'text-align: center' }, [
-										h('span', null, `包含：`),
-										h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
-									])
-								])
-							]),
-							showCancelButton: false,
-						})
+						// const h = this.$createElement;
+						// var name = data.data.join(',')
+						// this.$msgbox({
+						// 	message: h('p', null, [
+						// 		h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `额定电流(A)预警`),
+						// 		h('p', null, [
+						// 			h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
+						// 			h('div', { style: 'text-align: center' }, [
+						// 				h('span', null, `包含：`),
+						// 				h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
+						// 			])
+						// 		])
+						// 	]),
+						// 	showCancelButton: false,
+						// })
 					}
 				});
 				let urloperationtemperature = 'devicedetection/remind/operationtemperature/1';
@@ -1319,21 +1319,21 @@
 					method: "get",
 				}).then(({ data }) => {
 					if (data && data.code == 0 && data.count>0 ) {
-						const h = this.$createElement;
-						var name = data.data.join(',')
-						this.$msgbox({
-							message: h('p', null, [
-								h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `工作温度预警`),
-								h('p', null, [
-									h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
-									h('div', { style: 'text-align: center' }, [
-										h('span', null, `包含：`),
-										h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
-									])
-								])
-							]),
-							showCancelButton: false,
-						})
+						// const h = this.$createElement;
+						// var name = data.data.join(',')
+						// this.$msgbox({
+						// 	message: h('p', null, [
+						// 		h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `额定频率(Hz)预警`),
+						// 		h('p', null, [
+						// 			h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
+						// 			h('div', { style: 'text-align: center' }, [
+						// 				h('span', null, `包含：`),
+						// 				h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
+						// 			])
+						// 		])
+						// 	]),
+						// 	showCancelButton: false,
+						// })
 					}
 				});
 				let urlworkingpressure = 'devicedetection/remind/workingpressure/1';
@@ -1346,21 +1346,21 @@
 					method: "get",
 				}).then(({ data }) => {
 					if (data && data.code == 0 && data.count>0 ) {
-						const h = this.$createElement;
-						var name = data.data.join(',')
-						this.$msgbox({
-							message: h('p', null, [
-								h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `工作压力预警`),
-								h('p', null, [
-									h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
-									h('div', { style: 'text-align: center' }, [
-										h('span', null, `包含：`),
-										h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
-									])
-								])
-							]),
-							showCancelButton: false,
-						})
+						// const h = this.$createElement;
+						// var name = data.data.join(',')
+						// this.$msgbox({
+						// 	message: h('p', null, [
+						// 		h('div', { style: 'text-align: center;font-weight: bold;font-size: 20px;padding: 20px 0' }, `额定电压(kv)预警`),
+						// 		h('p', null, [
+						// 			h('div', { style: 'text-align: center;font-weight: bold;padding: 0 0 10px;font-size: 16px' }, `${data.count}条记录到达预警`),
+						// 			h('div', { style: 'text-align: center' }, [
+						// 				h('span', null, `包含：`),
+						// 				h('span', { style: 'color: teal;font-weight: bold' }, `${name}`)
+						// 			])
+						// 		])
+						// 	]),
+						// 	showCancelButton: false,
+						// })
 					}
 				});
 			},
