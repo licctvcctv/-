@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.StzcDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.entity.StzcEntity" id="stzcMap">
+        <result property="title" column="title"/>
+        <result property="imgurl" column="imgurl"/>
+        <result property="jieshao" column="jieshao"/>
+        <result property="youshi" column="youshi"/>
+        <result property="chanshu" column="chanshu"/>
+        <result property="xqurl" column="xqurl"/>
+        <result property="clicktime" column="clicktime"/>
+        <result property="clicknum" column="clicknum"/>
+        <result property="discussnum" column="discussnum"/>
+        <result property="storeupnum" column="storeupnum"/>
+    </resultMap>
+
+	<select id="selectListVO"
+		resultType="com.entity.vo.StzcVO" >
+		SELECT * FROM stzc  stzc         
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+	<select id="selectVO"
+		resultType="com.entity.vo.StzcVO" >
+		SELECT  stzc.* FROM stzc  stzc 	
+ 		<where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+    <select id="selectListView"
+		resultType="com.entity.view.StzcView" >
+
+		SELECT  stzc.* FROM stzc  stzc 	        
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+	<select id="selectView"
+		resultType="com.entity.view.StzcView" >
+		SELECT * FROM stzc  stzc <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+
+
+</mapper>
